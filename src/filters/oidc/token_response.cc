@@ -240,8 +240,8 @@ bool TokenResponseParserImpl::IsIDTokenInvalid(
   std::vector<std::string> audiences = {client_id};
   auto jwt_status = google::jwt_verify::verifyJwt(id_token, *keys_, audiences);
   if (jwt_status != google::jwt_verify::Status::Ok) {
-    spdlog::info("{}: `id_token` verification failed: {}", __func__,
-                 google::jwt_verify::getStatusString(jwt_status));
+    spdlog::info("incfly debug {}: `id_token` verification failed: {}, key size {}\n, id token\n{}", __func__,
+                 google::jwt_verify::getStatusString(jwt_status), keys_->keys().size(), id_token.jwt_);
     return true;
   }
 

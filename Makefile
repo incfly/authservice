@@ -18,7 +18,7 @@ compose:
 	docker-compose up --build
 
 docker: build
-	rm -rf build_release && mkdir -p build_release && cp -r bazel-bin/ build_release && docker build -f build/Dockerfile.runner -t authservice:$(USER) .
+	rm -rf build_release && mkdir -p build_release && cp -r bazel-bin/ build_release && docker build . -f build/Dockerfile.runner -t $(HUB)/authservice/authservice:0810a && docker push $(HUB)/authservice/authservice:0810a 
 
 docker-from-scratch:
 	docker build -f build/Dockerfile.builder -t authservice:$(USER) .
